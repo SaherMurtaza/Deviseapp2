@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Deviseapp2</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+
+  
+  
+    <% if notice %>
+      <p class="alert alert-success"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+      <p class="alert alert-danger"><%= alert %></p>
+    <% end %>
+
+    <div class="container-flouid">
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container">
+        <a class="navbar-brand" href="/">
+          <h3>My Books</h3>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <li>
+                <%= link_to 'All Books', books_path, class: "nav-link active" %>
+              </li>
+              <li> 
+                <%= link_to 'New Book', new_book_path, class: "nav-link active" %>
+              </li>  
+            </li>
+  
+          </ul>
+          <form class="">
+            <% if user_signed_in? %>
+              <%= link_to "Hi, #{current_user.email}", edit_user_registration_path %>
+              <%= link_to 'Sign Out', destroy_user_session_path, data:{turbo_method: :delete}, class: 'btn btn-outline-success' %>
+
+
+            <% else %>  
+              <%= link_to 'Sign In', new_user_session_path, class:"btn btn-outline-primary mr-2" %>
+              <%= link_to 'Sign Up', new_user_registration_path, class:"btn btn-outline-success" %>
+        
+            <% end %>
+  
+          </form>
+  
+        </div>
+      </div>
+    </nav>
+  </div>
+
+    <%= yield %>
+  </body>
+</html>
